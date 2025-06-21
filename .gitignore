@@ -1,0 +1,156 @@
+# .NET构建输出和中间文件
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+msbuild.log
+msbuild.err
+msbuild.wrn
+*.dll
+*.exe
+*.pdb
+*.cache
+*.suo
+*.user
+*.userosscache
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+# 编译后的文件
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# 日志文件
+*.log
+logs/
+Log/
+
+# Visual Studio文件
+.vs/
+.vscode/
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.sln.ide/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings
+.JustCode
+_TeamCity*
+*.dotCover
+.axoCover/*
+!.axoCover/settings.json
+*.coverage
+*.coveragexml
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.e2e
+$tf/
+.localhistory/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.iws
+.idea_modules/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# NuGet包
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Windows系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# macOS系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux系统文件
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# 测试结果
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# 数据库文件
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.sqlite3
+*.db
+
+# 临时文件
+[Tt]emp/
+.tmp/
+*.tmp
+*.bak
+*.swp
+*.*~
+~*
+
+# 其他常见的排除项
+node_modules/
+bower_components/
+.sass-cache/
+connect.lock
+coverage/
+libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+typings/
