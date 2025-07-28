@@ -140,9 +140,9 @@ namespace UltimateLogSystem.Demo
             var errorLogs = LogAnalyzer.FindByLevel(entries, LogLevel.Error);
             Console.WriteLine($"\n错误日志数量: {errorLogs.Count()}条");
             
-            // 关闭日志系统
-            LoggerFactory.CloseAll();
+            // 先关闭连接，再关闭日志系统
             connection.Close();
+            LoggerFactory.CloseAll();
             
             Console.WriteLine("\n高级演示完成");
         }

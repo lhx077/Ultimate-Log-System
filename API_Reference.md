@@ -117,6 +117,12 @@ public class LoggerConfiguration
     public LoggerConfiguration SetMinimumLevel(object level);
     public LoggerConfiguration AddConsoleWriter(ILogFormatter? formatter = null);
     public LoggerConfiguration AddFileWriter(string filePath, ILogFormatter? formatter = null, long maxFileSize = 10 * 1024 * 1024, int maxRollingFiles = 5);
+    public LoggerConfiguration AddFileWriterWithDailyRolling(
+        string filePath,
+        ILogFormatter? formatter = null,
+        long maxFileSize = 10 * 1024 * 1024,
+        int maxRollingFiles = 5,
+        bool useDailyRolling = true);
     public LoggerConfiguration AddWriter(ILogWriter writer);
     public LoggerConfiguration AddHandler(ILogHandler handler);
     public LoggerConfiguration AddEmailNotification(string smtpServer, int smtpPort, string fromEmail, string toEmail, string username, string password, object levelToHandle = LogLevel.Error);
@@ -156,18 +162,32 @@ public class ColorConsoleWriter : ILogWriter
 
 ### RollingFileWriter
 
-滚动文件输出，支持按大小自动滚动更新日志文件。
+滚动文件日志输出类，支持以下功能：
+1. 按大小滚动 - 当日志文件达到指定大小时，自动创建新文件
+2. 按日期滚动 - 每天创建新的日志文件
+3. 会话识别 - 同一天多次启动程序时，创建不同的日志文件
 
-```csharp
-public class RollingFileWriter : ILogWriter
-{
-    public RollingFileWriter(string filePath, ILogFormatter? formatter = null, long maxFileSize = 10 * 1024 * 1024, int maxRollingFiles = 5, Encoding? encoding = null);
-    
-    public void Write(LogEntry entry);
-    public void Flush();
-    public void Dispose();
-}
-```
+**参数:**
+- `filePath`: 文件路径
+- `formatter`: 格式化器 (可选，默认为TextFormatter)
+- `maxFileSize`: 最大文件大小 (默认10MB)
+- `maxRollingFiles`: 最大滚动文件数 (默认5)
+- `encoding`: 文件编码 (默认UTF8)
+- `useDailyRolling`: 是否启用日期滚动 (默认true)
+
+**日志文件命名规则:**
+
+使用日期滚动时:
+- 主文件: `[文件名].[日期].[会话ID].[扩展名]` (例如: `app.2023-04-15.a1b2c3d4.log`)
+- 滚动文件: `[文件名].[日期].[会话ID].[滚动序号].[扩展名]` (例如: `app.2023-04-15.a1b2c3d4.1.log`)
+
+不使用日期滚动时:
+- 主文件: `[文件名].[扩展名]` (例如: `app.log`)
+- 滚动文件: `[文件名].[滚动序号].[扩展名]` (例如: `app.1.log`)
+
+**滚动机制:**
+- 按大小滚动时，将当前文件重命名为第1个滚动文件，之前的第n个滚动文件变为第n+1个，超出maxRollingFiles的最旧文件被删除
+- 按日期滚动时，每天创建新的日志文件，同时保留独立的滚动历史
 
 ### DatabaseWriter
 

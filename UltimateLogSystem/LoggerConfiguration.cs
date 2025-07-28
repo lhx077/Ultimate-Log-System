@@ -43,7 +43,21 @@ namespace UltimateLogSystem
             long maxFileSize = 10 * 1024 * 1024,
             int maxRollingFiles = 5)
         {
-            Writers.Add(new RollingFileWriter(filePath, formatter, maxFileSize, maxRollingFiles));
+            Writers.Add(new RollingFileWriter(filePath, formatter, maxFileSize, maxRollingFiles, null, false));
+            return this;
+        }
+        
+        /// <summary>
+        /// 添加文件输出（带日期滚动）
+        /// </summary>
+        public LoggerConfiguration AddFileWriterWithDailyRolling(
+            string filePath,
+            ILogFormatter? formatter = null,
+            long maxFileSize = 10 * 1024 * 1024,
+            int maxRollingFiles = 5,
+            bool useDailyRolling = true)
+        {
+            Writers.Add(new RollingFileWriter(filePath, formatter, maxFileSize, maxRollingFiles, null, useDailyRolling));
             return this;
         }
         
@@ -89,6 +103,15 @@ namespace UltimateLogSystem
         public LoggerConfiguration AddAction(Action<LogEntry> action, Func<LogEntry, bool>? predicate = null)
         {
             Handlers.Add(new ActionHandler(action, predicate));
+            return this;
+        }
+        
+        /// <summary>
+        /// 添加日志操作
+        /// </summary>
+        public LoggerConfiguration AddAction(Action<LogEntry> action)
+        {
+            Handlers.Add(new ActionHandler(action));
             return this;
         }
         

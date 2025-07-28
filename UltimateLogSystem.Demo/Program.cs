@@ -16,13 +16,18 @@ namespace UltimateLogSystem.Demo
             Console.WriteLine("1. 基础演示");
             Console.WriteLine("2. 高级演示");
             Console.WriteLine("3. Web查看器演示");
-            Console.Write("请选择演示类型 (1/2/3): ");
+            Console.WriteLine("4. 日志滚动演示");
+            Console.Write("请选择演示类型 (1/2/3/4): ");
             
             var key = Console.ReadKey();
             Console.WriteLine();
             Console.WriteLine();
             
-            if (key.KeyChar == '3')
+            if (key.KeyChar == '4')
+            {
+                await RollingLogDemo.Run();
+            }
+            else if (key.KeyChar == '3')
             {
                 await WebViewerDemo();
             }
@@ -39,6 +44,7 @@ namespace UltimateLogSystem.Demo
                     .AddConsoleWriter(new TextFormatter("[{timestamp}] [{level}] [{category}] {message}"))
                     .AddFileWriter("logs/app.log")
                     .AddFileWriter("logs/app.json", new JsonFormatter())
+                    .AddFileWriterWithDailyRolling("logs/daily/app.log", new TextFormatter(), 1024 * 1024, 3) // 每天滚动，1MB文件大小限制
                     .AddAction(entry => {
                         if (entry.Level is LogLevel level && level >= LogLevel.Error)
                         {
