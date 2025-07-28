@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,6 +16,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>First Release</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
